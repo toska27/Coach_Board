@@ -1,36 +1,85 @@
+import { useState, useContext } from "react";
+import CoachContext from "../context/CoachContext";
+
 export default function MatchForm() {
+  const [opponent, setOpponent] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [result, setResult] = useState("");
+  const [score, setScore] = useState("");
+
+  const { addMatch } = useContext(CoachContext);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const newMatch = {
+      id: Date.now(),
+      opponent,
+      location,
+      date,
+      result,
+      score,
+    };
+
+    addMatch(newMatch);
+
+    setOpponent("");
+    setLocation("");
+    setDate("");
+    setResult("");
+    setScore("");
+  }
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Opponent:</label>
-          <input type="text" name="opponent" />
+          <input
+            type="text"
+            name="opponent"
+            placeholder="Opponent"
+            value={opponent}
+            onChange={(e) => setOpponent(e.target.value)}
+          />
         </div>
 
         <div>
-          <label htmlFor="location">Location:</label>
-          <select>
+          <select
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          >
+            <option>Location:</option>
             <option value="home">Home</option>
             <option value="away">Away</option>
           </select>
         </div>
 
         <div>
-          <label htmlFor="date">Date:</label>
-          <input type="date" name="date" />
+          <input
+            type="date"
+            name="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
         </div>
 
         <div>
-          <label htmlFor="result">Result:</label>
-          <select>
+          <select value={result} onChange={(e) => setResult(e.target.value)}>
+            <option>Result:</option>
             <option value="win">Win</option>
             <option value="lose">Lose</option>
           </select>
         </div>
 
         <div>
-          <label htmlFor="score">Score:</label>
-          <input type="text" name="score" />
+          <input
+            type="text"
+            name="score"
+            placeholder="Score:"
+            value={score}
+            onChange={(e) => setScore(e.target.value)}
+          />
         </div>
 
         <button type="submit">Submit</button>
