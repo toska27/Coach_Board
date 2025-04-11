@@ -7,22 +7,22 @@ import MatchForm from "./components/MatchForm";
 import PerformanceForm from "./components/PerformanceForm";
 import PerformanceTable from "./components/PerformanceTable";
 import PlayerStats from "./components/PlayerStats";
-import { PlayerProvider } from "./context/PlayerContext";
+import { CoachProvider } from "./context/CoachContext";
 
 function App() {
   return (
     <Router>
       <div className="app">
-        <PlayerProvider>
+        <CoachProvider>
           <Header />
           <Routes>
             <Route path="/" element={<PlayerForm />} />
             <Route path="/add-match" element={<MatchForm />} />
             <Route path="/add-performance" element={<PerformanceForm />} />
-            <Route path="/perfomaces" element={<PerformanceTable />} />
+            <Route path="/performances_table" element={<PerformanceTable />} />
             <Route path="/player_stats" element={<PlayerStats />} />
           </Routes>
-        </PlayerProvider>
+        </CoachProvider>
       </div>
     </Router>
   );
