@@ -3,7 +3,6 @@ import CoachContext from "../context/CoachContext";
 
 export default function MatchForm() {
   const [opponent, setOpponent] = useState("");
-  const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [result, setResult] = useState("");
   const [score, setScore] = useState("");
@@ -16,7 +15,6 @@ export default function MatchForm() {
     const newMatch = {
       id: Date.now(),
       opponent,
-      location,
       date,
       result,
       score,
@@ -25,7 +23,6 @@ export default function MatchForm() {
     addMatch(newMatch);
 
     setOpponent("");
-    setLocation("");
     setDate("");
     setResult("");
     setScore("");
@@ -42,17 +39,6 @@ export default function MatchForm() {
             value={opponent}
             onChange={(e) => setOpponent(e.target.value)}
           />
-        </div>
-
-        <div>
-          <select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          >
-            <option>Location:</option>
-            <option value="home">Home</option>
-            <option value="away">Away</option>
-          </select>
         </div>
 
         <div>

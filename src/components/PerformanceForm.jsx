@@ -35,7 +35,7 @@ export default function PerformanceForm() {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <select value={player} onChange={(e) => handleSubmit(e.target.value)}>
+          <select value={player} onChange={(e) => setPlayer(e.target.value)}>
             <option>Player:</option>
             {players.map((player) => {
               return (
@@ -48,7 +48,7 @@ export default function PerformanceForm() {
         </div>
 
         <div>
-          <select value={game} onChange={(e) => handleSubmit(e.target.value)}>
+          <select value={game} onChange={(e) => setGame(e.target.value)}>
             <option>Game:</option>
             {matches.map((match) => {
               return (
