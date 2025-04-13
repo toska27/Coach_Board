@@ -1,8 +1,14 @@
 import { useContext, useState } from "react";
 import CoachContext from "../context/CoachContext";
+import {
+  capitalizedValue,
+  validateName,
+  validateNumber,
+  validateSelectInput,
+} from "./validation/Validation";
 
 export default function PlayerForm() {
-  const [nameValue, setNameValue] = useState("");
+  const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [position, setPosition] = useState("");
   const [errors, setErorrs] = useState({
@@ -13,55 +19,52 @@ export default function PlayerForm() {
 
   const { addPlayer } = useContext(CoachContext);
 
-  let name = nameValue.trim();
-  name = name.charAt(0).toUpperCase() + name.slice(1);
-
-  function validation() {
-    let formErrors = {};
-
-    // Name Validation
-    if (name === "") {
-      formErrors.nameError = "Name is required";
-    } else if (name.length < 2) {
-      formErrors.nameError = "Name must be at least 2 characters.";
-    } else if (!/^[A-Za-z]+$/.test(name)) {
-      formErrors.nameError = "Name can only contain letters.";
-    }
-
-    // Number validation
-    if (number < 0 || number > 99 || number === "") {
-      formErrors.numberError = "You must enter number beetwen 0 and 99";
-    }
-
-    // Position validation
-    if (position === "Select position:" || position === "") {
-      formErrors.positionError = "Select poistion of player.";
-    }
-
-    setErorrs(formErrors);
-    return Object.keys(formErrors).length === 0; // valid if no errors
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
 
-    const isValid = validation();
-    if (!isValid) {
+    const capitalizedName = capitalizedValue(name);
+
+    // Validation
+    const formErrors = {};
+
+    const nameError = validateName(capitalizedName, "Name");
+    if (nameError) {
+      formErrors.nameError = nameError;
+    }
+
+    const numberError = validateNumber(number);
+    if (numberError) {
+      formErrors.numberError = numberError;
+    }
+
+    const positionError = validateSelectInput(
+      position,
+      "Select a player position"
+    );
+    if (positionError) {
+      formErrors.positionError = positionError;
+    }
+
+    setErorrs(formErrors);
+
+    if (
+      formErrors.nameError ||
+      formErrors.numberError ||
+      formErrors.positionError
+    ) {
       return;
     }
 
     const newPlayer = {
       id: Date.now(),
-      name,
+      name: capitalizedName,
       number,
       position,
     };
 
     addPlayer(newPlayer);
 
-    console.log(newPlayer);
-
-    setNameValue("");
+    setName("");
     setNumber("");
     setPosition("");
     setErorrs({});
@@ -75,8 +78,8 @@ export default function PlayerForm() {
             type="text"
             name="player"
             placeholder="Name:"
-            value={nameValue}
-            onChange={(e) => setNameValue(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           {errors.nameError && <p>{errors.nameError}</p>}
         </div>
