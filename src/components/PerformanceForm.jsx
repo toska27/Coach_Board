@@ -82,7 +82,7 @@ export default function PerformanceForm() {
 
   return players.length === 0 || matches.length === 0 ? (
     <div>
-      <h2>You must entered player and match first.</h2>
+      <h2>You must add player and match first.</h2>
     </div>
   ) : (
     <div>

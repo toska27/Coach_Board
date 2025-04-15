@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import CoachContext from "../context/CoachContext";
 
 export default function PerfomanceTable() {
-  const { matches, performances } = useContext(CoachContext);
   const [selectedMatch, setSelectedMatch] = useState("");
+  const { matches, performances } = useContext(CoachContext);
+
+  const navigate = useNavigate();
 
   const filteredPerformances = performances.filter(
     (performance) => performance.game === selectedMatch
@@ -12,9 +15,24 @@ export default function PerfomanceTable() {
     (match) => match.opponent === selectedMatch
   );
 
-  console.log(filteredMatches);
-
-  return (
+  return matches.length === 0 ? (
+    <div>
+      <h2>
+        You must{" "}
+        <p
+          style={{
+            display: "inline",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+          onClick={() => navigate("/add-match")}
+        >
+          add match
+        </p>{" "}
+        first.
+      </h2>
+    </div>
+  ) : (
     <div>
       <h2>Select Match</h2>
       <select
@@ -31,8 +49,24 @@ export default function PerfomanceTable() {
         })}
       </select>
 
-      {filteredPerformances.length > 0 && (
-        <>
+      {selectedMatch === "" ? null : filteredPerformances.length === 0 ? (
+        <div>
+          <h3>
+            <p
+              style={{
+                display: "inline",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+              onClick={() => navigate("/add-performance")}
+            >
+              Add performance
+            </p>{" "}
+            for this match.
+          </h3>
+        </div>
+      ) : (
+        <div>
           <h2>Date: {filteredMatches[0].date}</h2>
           <h2>
             Result: {filteredMatches[0].score} - {filteredMatches[0].result}
@@ -58,7 +92,7 @@ export default function PerfomanceTable() {
               ))}
             </tbody>
           </table>
-        </>
+        </div>
       )}
     </div>
   );
