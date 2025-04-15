@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import CoachContext from "../context/CoachContext";
+import { validateNumber, validateSelectInput } from "./validation/Validation";
 
 export default function PerformanceForm() {
   const [player, setPlayer] = useState("");
@@ -7,11 +8,58 @@ export default function PerformanceForm() {
   const [points, setPoints] = useState("");
   const [rebounds, setRebounds] = useState("");
   const [assists, setAssists] = useState("");
+  const [errors, setErorrs] = useState({
+    playerError: "",
+    gameError: "",
+    pointsError: "",
+    assistsError: "",
+    reboundsError: "",
+  });
 
   const { players, matches, addPerformance } = useContext(CoachContext);
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // Validation
+    const formErrors = {};
+
+    const playerError = validateSelectInput(player, "Select player");
+    if (playerError) {
+      formErrors.playerError = playerError;
+    }
+
+    const gameError = validateSelectInput(game, "Select game");
+    if (gameError) {
+      formErrors.gameError = gameError;
+    }
+
+    const pointsError = validateNumber(points);
+    if (pointsError) {
+      formErrors.pointsError = pointsError;
+    }
+
+    const assistsError = validateNumber(assists);
+    if (assistsError) {
+      formErrors.assistsError = assistsError;
+    }
+
+    const reboundsError = validateNumber(rebounds);
+    if (reboundsError) {
+      formErrors.reboundsError = reboundsError;
+    }
+
+    setErorrs(formErrors);
+
+    if (
+      formErrors.playerError ||
+      formErrors.gameError ||
+      formErrors.pointsError ||
+      formErrors.assistsError ||
+      formErrors.reboundsError
+    ) {
+      return;
+    }
 
     const newPerfomance = {
       id: Date.now(),
@@ -29,9 +77,14 @@ export default function PerformanceForm() {
     setPoints("");
     setRebounds("");
     setAssists("");
+    setErorrs("");
   }
 
-  return (
+  return players.length === 0 || matches.length === 0 ? (
+    <div>
+      <h2>You must entered player and match first.</h2>
+    </div>
+  ) : (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
@@ -45,6 +98,7 @@ export default function PerformanceForm() {
               );
             })}
           </select>
+          {errors.playerError && <p>{errors.playerError}</p>}
         </div>
 
         <div>
@@ -58,6 +112,7 @@ export default function PerformanceForm() {
               );
             })}
           </select>
+          {errors.gameError && <p>{errors.gameError}</p>}
         </div>
 
         <div>
@@ -68,16 +123,7 @@ export default function PerformanceForm() {
             value={points}
             onChange={(e) => setPoints(e.target.value)}
           />
-        </div>
-
-        <div>
-          <input
-            type="number"
-            name="rebounds"
-            placeholder="Rebounds:"
-            value={rebounds}
-            onChange={(e) => setRebounds(e.target.value)}
-          />
+          {errors.pointsError && <p>{errors.pointsError}</p>}
         </div>
 
         <div>
@@ -88,6 +134,18 @@ export default function PerformanceForm() {
             value={assists}
             onChange={(e) => setAssists(e.target.value)}
           />
+          {errors.assistsError && <p>{errors.assistsError}</p>}
+        </div>
+
+        <div>
+          <input
+            type="number"
+            name="rebounds"
+            placeholder="Rebounds:"
+            value={rebounds}
+            onChange={(e) => setRebounds(e.target.value)}
+          />
+          {errors.reboundsError && <p>{errors.reboundsError}</p>}
         </div>
 
         <button type="submit">Submit</button>
