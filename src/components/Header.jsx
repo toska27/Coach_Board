@@ -7,10 +7,10 @@ export default function Header() {
       <nav>
         <ul className="nav-links">
           <li>
-            <Link to="/">Players</Link>
+            <Link to="/">Add Player</Link>
           </li>
           <li>
-            <Link to="/add-match">Matches</Link>
+            <Link to="/add-match">Add Match</Link>
           </li>
           <li>
             <Link to="/add-performance">Add Performance</Link>
