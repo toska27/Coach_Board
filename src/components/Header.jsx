@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import styles from "../styles/Header.module.scss";
 
 export default function Header() {
   return (
-    <header className="header">
+    <header className={styles.header}>
       <h2>🏀 CoachBoard</h2>
       <nav>
-        <ul className="nav-links">
+        <ul className={styles["nav-links"]}>
           <li>
             <Link to="/">Add Player</Link>
           </li>

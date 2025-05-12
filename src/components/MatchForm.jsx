@@ -6,6 +6,7 @@ import {
   validateSelectInput,
   capitalizedValue,
 } from "./validation/Validation";
+import styles from "../styles/MatchForm.module.scss";
 
 export default function MatchForm() {
   const [opponent, setOpponent] = useState("");
@@ -78,7 +79,7 @@ export default function MatchForm() {
   }
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
         <div>
           <input

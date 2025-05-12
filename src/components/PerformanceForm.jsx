@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import CoachContext from "../context/CoachContext";
 import { validateNumber, validateSelectInput } from "./validation/Validation";
+import styles from "../styles/PerformanceForm.module.scss";
 
 export default function PerformanceForm() {
   const [player, setPlayer] = useState("");
@@ -85,7 +86,7 @@ export default function PerformanceForm() {
       <h2>You must add player and match first.</h2>
     </div>
   ) : (
-    <div>
+    <div className={styles.performanceContainer}>
       <form onSubmit={handleSubmit}>
         <div>
           <select value={player} onChange={(e) => setPlayer(e.target.value)}>

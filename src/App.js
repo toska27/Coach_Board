@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/app.css";
 
 import Header from "./components/Header";
 import PlayerForm from "./components/PlayerForm";

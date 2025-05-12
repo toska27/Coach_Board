@@ -6,6 +6,7 @@ import {
   validateNumber,
   validateSelectInput,
 } from "./validation/Validation";
+import styles from "../styles/PlayerForm.module.scss";
 
 export default function PlayerForm() {
   const [name, setName] = useState("");
@@ -71,7 +72,7 @@ export default function PlayerForm() {
   }
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
         <div>
           <input
