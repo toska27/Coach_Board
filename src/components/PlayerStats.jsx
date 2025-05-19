@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import CoachContext from "../context/CoachContext";
+import styles from "../styles/PlayerStats.module.scss";
 
 export default function PlayerStats() {
   const [selectedPlayer, setSelectedPlayer] = useState("");
@@ -17,27 +18,20 @@ export default function PlayerStats() {
 
   return players.length === 0 ? (
     <div>
-      <h2>
+      <h2 className={styles.info}>
         You must{" "}
-        <p
-          style={{
-            display: "inline",
-            cursor: "pointer",
-            textDecoration: "underline",
-          }}
-          onClick={() => navigate("/add-player")}
-        >
+        <p className={styles.pointer} onClick={() => navigate("/")}>
           add player
         </p>{" "}
         first.
       </h2>
     </div>
   ) : (
-    <div>
-      <h2>Select Player</h2>
+    <div className="containerTable">
       <select
         value={selectedPlayer}
         onChange={(e) => setSelectedPlayer(e.target.value)}
+        className={styles.selectPlayer}
       >
         <option>-- Select player --</option>
         {players.map((player) => {
@@ -51,18 +45,14 @@ export default function PlayerStats() {
 
       {selectedPlayer === "" || filteredPlayer.length === 0 ? null : (
         <div>
-          <h2>Name: {filteredPlayer[0].name}</h2>
-          <h4>Number: {filteredPlayer[0].number}</h4>
-          <h4>Position: {filteredPlayer[0].position}</h4>
+          <h2 className="tableInfo">Name: {filteredPlayer[0].name}</h2>
+          <h2 className="tableInfo">Number: {filteredPlayer[0].number}</h2>
+          <h2 className="tableInfo">Position: {filteredPlayer[0].position}</h2>
           {filteredPerformances.length === 0 ? (
             <div>
-              <h3>
+              <h3 className="tableInfo">
                 <p
-                  style={{
-                    display: "inline",
-                    cursor: "pointer",
-                    textDecoration: "underline",
-                  }}
+                  className={styles.pointer}
                   onClick={() => navigate("/add-performance")}
                 >
                   Add performance
@@ -72,7 +62,7 @@ export default function PlayerStats() {
             </div>
           ) : (
             <>
-              <h3>Player Stats</h3>
+              <h3>Player Stats:</h3>
               <table>
                 <thead>
                   <tr>

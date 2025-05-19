@@ -1,0 +1,26 @@
+.info{
+  text-align: center;
+  margin-top: 10%;
+  color: #d25400;
+  font-size: 40px;
+ }
+.selectPlayer {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.pointer {
+  display: inline;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #fffdfc;
+  transition: color 0.3s;
+  font-size: 25px;
+}
+
+.pointer:hover {
+  color: #d3d3d3;
+}

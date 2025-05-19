@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import CoachContext from "../context/CoachContext";
+import styles from "../styles/PerformanceTable.module.scss";
 
 export default function PerfomanceTable() {
   const [selectedMatch, setSelectedMatch] = useState("");
@@ -17,27 +18,20 @@ export default function PerfomanceTable() {
 
   return matches.length === 0 ? (
     <div>
-      <h2>
+      <h2 className={styles.info}>
         You must{" "}
-        <p
-          style={{
-            display: "inline",
-            cursor: "pointer",
-            textDecoration: "underline",
-          }}
-          onClick={() => navigate("/add-match")}
-        >
+        <p className={styles.pointer} onClick={() => navigate("/add-match")}>
           add match
         </p>{" "}
         first.
       </h2>
     </div>
   ) : (
-    <div>
-      <h2>Select Match</h2>
+    <div className="containerTable">
       <select
         value={selectedMatch}
         onChange={(e) => setSelectedMatch(e.target.value)}
+        className={styles.selectMatch}
       >
         <option value="">-- Choose a match --</option>
         {matches.map((match) => {
@@ -51,13 +45,13 @@ export default function PerfomanceTable() {
 
       {selectedMatch === "" ? null : filteredPerformances.length === 0 ? (
         <div>
-          <h3>
+          <h2 className="tableInfo">Date: {filteredMatches[0].date}</h2>
+          <h2 className="tableInfo">
+            Result: {filteredMatches[0].score} - {filteredMatches[0].result}
+          </h2>
+          <h3 className="tableInfo">
             <p
-              style={{
-                display: "inline",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
+              className={styles.pointer}
               onClick={() => navigate("/add-performance")}
             >
               Add performance
@@ -67,11 +61,11 @@ export default function PerfomanceTable() {
         </div>
       ) : (
         <div>
-          <h2>Date: {filteredMatches[0].date}</h2>
-          <h2>
+          <h2 className="tableInfo">Date: {filteredMatches[0].date}</h2>
+          <h2 className="tableInfo">
             Result: {filteredMatches[0].score} - {filteredMatches[0].result}
           </h2>
-          <h3>Performances</h3>
+          <h3 className={styles.perfTable}>Performances:</h3>
           <table>
             <thead>
               <tr>
