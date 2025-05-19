@@ -83,10 +83,10 @@ export default function PerformanceForm() {
 
   return players.length === 0 || matches.length === 0 ? (
     <div>
-      <h2>You must add player and match first.</h2>
+      <h2 className={styles.info}>You must add player and match first.</h2>
     </div>
   ) : (
-    <div className={styles.performanceContainer}>
+    <div className="containerForm">
       <form onSubmit={handleSubmit}>
         <div>
           <select value={player} onChange={(e) => setPlayer(e.target.value)}>

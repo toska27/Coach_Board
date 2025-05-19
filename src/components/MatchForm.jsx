@@ -79,7 +79,7 @@ export default function MatchForm() {
   }
 
   return (
-    <div className={styles.formContainer}>
+    <div className="containerForm">
       <form onSubmit={handleSubmit}>
         <div>
           <input

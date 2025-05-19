@@ -72,7 +72,7 @@ export default function PlayerForm() {
   }
 
   return (
-    <div className={styles.formContainer}>
+    <div className="containerForm">
       <form onSubmit={handleSubmit}>
         <div>
           <input
