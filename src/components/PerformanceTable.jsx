@@ -5,6 +5,7 @@ import styles from "../styles/PerformanceTable.module.scss";
 
 export default function PerfomanceTable() {
   const [selectedMatch, setSelectedMatch] = useState("");
+  const [filteredBy, setFilteredBy] = useState("");
   const { matches, performances } = useContext(CoachContext);
 
   const navigate = useNavigate();
@@ -66,6 +67,17 @@ export default function PerfomanceTable() {
             Result: {filteredMatches[0].score} - {filteredMatches[0].result}
           </h2>
           <h3 className={styles.perfTable}>Performances:</h3>
+          <div className="filteredBy">
+            <select
+              value={filteredBy}
+              onChange={(e) => setFilteredBy(e.target.value)}
+            >
+              <option value="">Filtered by:</option>
+              <option value="points">Filtered by: Points</option>
+              <option value="assists">Filtered by: Assists</option>
+              <option value="rebounds">Filtered by: Rebounds</option>
+            </select>
+          </div>
           <table>
             <thead>
               <tr>
@@ -76,14 +88,21 @@ export default function PerfomanceTable() {
               </tr>
             </thead>
             <tbody>
-              {filteredPerformances.map((perf, i) => (
-                <tr key={i}>
-                  <td>{perf.player}</td>
-                  <td>{perf.points}</td>
-                  <td>{perf.assists}</td>
-                  <td>{perf.rebounds}</td>
-                </tr>
-              ))}
+              {filteredPerformances
+                .sort((a, b) => {
+                  if (filteredBy === "points") return b.points - a.points;
+                  if (filteredBy === "assists") return b.assists - a.assists;
+                  if (filteredBy === "rebounds") return b.rebounds - a.rebounds;
+                  return 0;
+                })
+                .map((perf, i) => (
+                  <tr key={i}>
+                    <td>{perf.player}</td>
+                    <td>{perf.points}</td>
+                    <td>{perf.assists}</td>
+                    <td>{perf.rebounds}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
