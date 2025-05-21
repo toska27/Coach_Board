@@ -51,7 +51,7 @@ export default function PerfomanceTable() {
           </h2>
           <h3 className="tableInfo">
             <p
-              className={styles.pointer}
+              className={styles.secondPointer}
               onClick={() => navigate("/add-performance")}
             >
               Add performance

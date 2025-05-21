@@ -52,7 +52,7 @@ export default function PlayerStats() {
             <div>
               <h3 className="tableInfo">
                 <p
-                  className={styles.pointer}
+                  className={styles.secondPointer}
                   onClick={() => navigate("/add-performance")}
                 >
                   Add performance

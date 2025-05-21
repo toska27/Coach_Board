@@ -10,6 +10,7 @@ body {
   color: #ffffff;
   line-height: 1.6;
 }
+
 .containerForm{
   max-width: 400px;
   margin: 30px auto;
@@ -18,6 +19,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .containerTable {
   max-width: 800px;
   margin: 40px auto;
@@ -48,32 +50,38 @@ input:focus,
 select:focus {
   border-color: #ff6600;
 }
+
 .tableInfo{
   margin-bottom: 12px;
   color: #fffdfc;
   font-size: 25px;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
   background-color: #ffffff;
 
 }
+
 th, td {
   padding: 14px;
   text-align: center;
   border: 1px solid #a0a0a0;
   
 }
+
 th {
   background-color: #222;
   font-weight: 600;
   color: #e4e4e4;
 }
+
 td{
   color: #333333;
   font-weight: 600;
 }
+
 tbody tr:hover {
   background-color: #fff8f3;
 }
