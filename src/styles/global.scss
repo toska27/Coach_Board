@@ -51,6 +51,27 @@ select:focus {
   border-color: #ff6600;
 }
 
+button {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff6600;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+button:hover {
+  background-color: #d25400;
+}
+  
+p {
+  color: #d60000;
+  margin: 0;
+  font-size: 14px;
+}
+
 .tableInfo{
   margin-bottom: 12px;
   color: #fffdfc;
