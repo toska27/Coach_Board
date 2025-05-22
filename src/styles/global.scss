@@ -23,7 +23,7 @@ body {
 .containerTable {
   max-width: 800px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 20px 50px;
   background-color: #f19935bc;
   border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -110,4 +110,11 @@ tbody tr:hover {
 .filteredBy{
   margin: 0 0 10px 0;
   width: 40%;
+}
+
+@media (max-width: 768px) {
+  .containerTable{
+    max-width: 400px;
+    padding: 10px 2px;
+  }
 }
